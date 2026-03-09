@@ -10,14 +10,13 @@
 \usepackage{soul}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usepackage{colortbl}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \pagestyle{plain}
 \begin{document}
 
-\title{Moving Megawatts: How electricity market zone splits impact charging infrastructure planning for long-haul electric trucks\\
-{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
-should not be used}
+\title{Moving Megawatts: How electricity market zone splits impact charging infrastructure planning for long-haul electric trucks
 \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
@@ -61,13 +60,11 @@ should not be used}
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+The potential splitting of Germany's unified electricity bidding zone into a wind-rich North and a demand-heavy South would create persistent regional price differentials. For long-haul battery-electric trucks that traverse multiple pricing regions, such differentials alter where along a route it is cheapest to charge, thereby reshaping the spatial distribution of charging infrastructure demand. We quantify this effect using a cost-minimizing linear program for multi-year fleet turnover and spatially resolved charging allocation on approximately 1,870 origin-destination freight flows along the Scandinavian-Mediterranean TEN-T corridor. Six zone-split scenarios---combining three North-South price spreads (5\%, 10\%, 20\%) with two implementation timings (from 2032, from 2040)---are compared against a unified-zone baseline. Results show that while the aggregate BEV fleet share is insensitive to the split, the spatial allocation of charging demand shifts substantially northward: in the most pronounced scenario (20\% spread from 2032), DE-North gains +111 MW of required charging capacity at 2040, while DE-South loses -87 MW. The redistribution propagates beyond German borders, with Austria losing up to 31 MW of required capacity. Total corridor-wide charging capacity remains constant across scenarios, confirming that the zone split redistributes---but does not reduce---aggregate demand. These findings highlight that electricity market zone design creates infrastructure planning externalities for the transport sector that extend across national borders.
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert
+battery-electric trucks, charging infrastructure, electricity market zones, bidding zone splitting, freight transport electrification
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -146,11 +143,11 @@ Baseline wholesale electricity prices are taken from the \textbf{Go~RES} scenari
 
 \hl{Local charging costs are composed of: wholesale electricity price, network charges (grid fees), CPO markup, and charging infrastructure investment costs. Describe each component and how they vary spatially. Include map showing two snapshots of charging cost landscape.}
 
-Fig.~\ref{fig:elec_prices} shows the resulting electricity charging prices (including CPO markup) for all four spread levels with the earliest timing (from~2032). The North--South differential is clearly visible for the Mid and High spread cases, while non-German countries remain unaffected.
+Fig.~\ref{fig:elec_prices} shows the resulting electricity charging prices (including CPO markup) for the High~(20\%) spread scenario (split from~2032). The North--South differential is clearly visible: DE-North prices fall below the corridor-country range while DE-South prices rise above it. Non-German countries remain unaffected by the split.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{eem_electricity_prices_by_country_4scenarios.pdf}}
-\caption{Fast-charging electricity prices by country and German zone for the four spread levels (split from 2032). Gray areas show diesel cost (base and including CO$_2$ price). DE-North (squares) and DE-South (triangles) diverge with increasing spread.}
+\caption{Fast-charging electricity prices for the High~(20\%) zone-split scenario (from~2032). Gray areas show diesel cost (base and including CO$_2$ price). The blue band shows the range of other corridor countries (NO, FI, SE, DK, AT, IT). DE-North (squares) and DE-South (triangles) diverge from~2032 onward.}
 \label{fig:elec_prices}
 \end{figure}
 
@@ -246,6 +243,47 @@ North-only routes gain on average $+21$~pp in BEV share, with many routes shifti
 \end{figure}
 
 \subsection{Spatial redistribution of charging demand}
+
+Fig.~\ref{fig:charging_delta} shows the change in annual charging demand relative to the baseline for each zone-split scenario. The redistribution is approximately symmetric: charging demand gained by DE-North mirrors the loss in DE-South. The effect scales with the price spread---the High~(20\%) from-2032 scenario shifts nearly 500~GWh/a northward by~2048, while even the Low~(5\%) scenario produces a shift of $\sim$270~GWh/a. Later implementation (from~2040 vs.\ from~2032) reduces the shift but does not eliminate it, as the cumulative fleet and infrastructure decisions made before the split constrain the system's response.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{eem_charging_demand_delta.pdf}}
+\caption{Change in annual BEV charging demand relative to the baseline (unified zone) for DE-North (top, positive) and DE-South (bottom, negative). Solid lines: split from~2032; dotted lines: split from~2040. Colors indicate spread level (blue: 5\%, orange: 10\%, red: 20\%).}
+\label{fig:charging_delta}
+\end{figure}
+
+\subsection{Infrastructure utilization and cross-border spillovers}
+
+Because charging infrastructure is irreversible once deployed, the zone split creates a mismatch between where capacity was built (under baseline assumptions) and where it is actually needed. Fig.~\ref{fig:used_unused} compares installed capacity utilization for the baseline and the High~(20\%) from-2032 scenario. In DE-South, the split causes substantial overcapacity (hatched bars), as demand migrates northward but previously installed chargers remain. In DE-North, the opposite occurs: required capacity exceeds the baseline build-out, creating a deficit that must be met by accelerated infrastructure investment.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{eem_used_vs_unused_capacity.pdf}}
+\caption{Installed charging capacity decomposed into used (solid) and unused (hatched) components for DE-North (top) and DE-South (bottom). Blue: baseline (unified zone); red: High~(20\%) zone split from~2032.}
+\label{fig:used_unused}
+\end{figure}
+
+The redistribution of charging demand within Germany propagates to neighbouring countries along the corridor. Table~\ref{tab:mw_delta} reports the change in required charging capacity (MW) relative to the baseline for each zone and scenario at~2040. DE-North gains up to $+111$~MW of required capacity (H-2032), while DE-South loses $-87$~MW. Notably, Austria loses up to $-31$~MW in the most extreme scenario (H-2032) as the large price spread pulls charging demand back into cheaper DE-North, but shows small increases ($<+4$~MW) in all other scenarios. Italy gains up to $+12$~MW in the H-2032 case. Denmark is essentially unaffected ($<1$~MW). The total corridor capacity remains constant across scenarios ($\sim$559~MW), confirming that the zone split redistributes---but does not reduce---aggregate charging demand. These results show that a unilateral zone-split decision in Germany creates infrastructure planning externalities for transit countries.
+
+\begin{table}[htbp]
+\caption{Change in required charging capacity vs.\ baseline at 2040 (MW)}
+\label{tab:mw_delta}
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}l r r r r r@{}}
+\toprule
+\textbf{Scenario} & \textbf{DE-N} & \textbf{DE-S} & \textbf{AT} & \textbf{IT} & \textbf{DK} \\
+\midrule
+L-2032 & $+$58.3 & $-$56.4 & $+$0.8 & $-$1.9 & $<$1 \\
+M-2032 & $+$72.4 & $-$70.6 & $+$1.8 & $-$1.8 & $<$1 \\
+\rowcolor[gray]{0.85} H-2032 & $+$111.1 & $-$87.4 & $-$30.8 & $+$11.6 & $<$1 \\
+\midrule
+L-2040 & $+$48.7 & $-$48.7 & $+$0.7 & $+$0.0 & $<$1 \\
+M-2040 & $+$64.2 & $-$60.9 & $+$2.0 & $-$3.3 & $<$1 \\
+H-2040 & $+$81.5 & $-$79.0 & $+$3.7 & $-$2.5 & $<$1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
 
 \section{Conclusion and Future Work}
 

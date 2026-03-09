@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2026.3.2)  9 MAR 2026 12:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2026.3.2)  9 MAR 2026 14:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -431,45 +431,45 @@ Underfull \hbox (badness 2269) in paragraph at lines 227--228
 <eem_route_bev_violin.pdf, id=62, 280.9013pt x 294.30916pt>
 File: eem_route_bev_violin.pdf Graphic file (type pdf)
 <use eem_route_bev_violin.pdf>
-Package pdftex.def Info: eem_route_bev_violin.pdf  used on input line 248.
+Package pdftex.def Info: eem_route_bev_violin.pdf  used on input line 243.
 (pdftex.def)             Requested size: 214.20154pt x 224.43173pt.
 
 
 
-LaTeX Warning: Citation `b1' on page 4 undefined on input line 269.
+LaTeX Warning: Citation `b1' on page 4 undefined on input line 264.
 
 
-LaTeX Warning: Citation `b2' on page 4 undefined on input line 270.
+LaTeX Warning: Citation `b2' on page 4 undefined on input line 265.
 
 
-LaTeX Warning: Citation `b3' on page 4 undefined on input line 271.
+LaTeX Warning: Citation `b3' on page 4 undefined on input line 266.
 
 
-LaTeX Warning: Citation `b3' on page 4 undefined on input line 271.
+LaTeX Warning: Citation `b3' on page 4 undefined on input line 266.
 
 
-LaTeX Warning: Citation `b3' on page 4 undefined on input line 271.
+LaTeX Warning: Citation `b3' on page 4 undefined on input line 266.
 
 
-LaTeX Warning: Citation `b3' on page 4 undefined on input line 272.
+LaTeX Warning: Citation `b3' on page 4 undefined on input line 267.
 
 
-LaTeX Warning: Citation `b4' on page 4 undefined on input line 280.
+LaTeX Warning: Citation `b4' on page 4 undefined on input line 275.
 
 
-LaTeX Warning: Citation `b5' on page 4 undefined on input line 281.
+LaTeX Warning: Citation `b5' on page 4 undefined on input line 276.
 
 
-LaTeX Warning: Citation `b6' on page 4 undefined on input line 286.
+LaTeX Warning: Citation `b6' on page 4 undefined on input line 281.
 
 
-Underfull \hbox (badness 1521) in paragraph at lines 291--292
+Underfull \hbox (badness 1521) in paragraph at lines 286--287
 []\OT1/ptm/m/n/8 M. Kn[]orr, C. Fraun-holz, and W. Ficht-ner, ``Im-pacts of Ger
 -man
  []
 
 
-Underfull \hbox (badness 1603) in paragraph at lines 291--292
+Underfull \hbox (badness 1603) in paragraph at lines 286--287
 \OT1/ptm/m/n/8 bid-ding zone con-fig-u-ra-tions on the Eu-ro-pean elec-tric-ity
  mar-ket,''
  []
@@ -477,21 +477,21 @@ Underfull \hbox (badness 1603) in paragraph at lines 291--292
 
 
 [4 <./eem_route_bev_violin.pdf>]
-Underfull \hbox (badness 7308) in paragraph at lines 304--305
+Underfull \hbox (badness 7308) in paragraph at lines 299--300
 []\OT1/ptm/m/n/8 A. M. Go-lab, H. Gar-dian, P.-Y. Oei, and T. S. Schmidt,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--305
+Underfull \hbox (badness 10000) in paragraph at lines 299--300
 \OT1/ptm/m/n/8 ``TransComp: An op-ti-miza-tion model for the tran-si-tion to
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--305
+Underfull \hbox (badness 10000) in paragraph at lines 299--300
 \OT1/ptm/m/n/8 low-emission freight trans-port,'' 2025. [On-line]. Avail-able:
  []
 
-** WARNING: Ignoring useless \section in Appendix (line 309).
+** WARNING: Ignoring useless \section in Appendix (line 304).
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -507,7 +507,9 @@ Before submitting the final camera ready copy, remember to:
 
 
 
-[5] (conference_101719.aux)
+[5
+
+] (conference_101719.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-03-26>
@@ -553,7 +555,7 @@ fonts/type1/urw/times/utmb8a.pfb><C:/Users/golab/AppData/Local/Programs/MiKTeX3
 /fonts/type1/urw/times/utmbi8a.pfb><C:/Users/golab/AppData/Local/Programs/MiKTe
 X3/fonts/type1/urw/times/utmr8a.pfb><C:/Users/golab/AppData/Local/Programs/MiKT
 eX3/fonts/type1/urw/times/utmri8a.pfb>
-Output written on conference_101719.pdf (5 pages, 451054 bytes).
+Output written on conference_101719.pdf (5 pages, 450956 bytes).
 PDF statistics:
  251 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{float}
 \usepackage{soul}
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -16,8 +17,7 @@
 \pagestyle{plain}
 \begin{document}
 
-\title{Moving Megawatts: How electricity market zone splits impact charging infrastructure planning for long-haul electric trucks
-\thanks{Identify applicable funding agency here. If none, delete this.}
+\title{Moving Megawatts: How electricity market zone splits impact charging infrastructure planning for international long-haul electric trucks
 }
 
 % \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
@@ -60,7 +60,7 @@
 \maketitle
 
 \begin{abstract}
-The potential splitting of Germany's unified electricity bidding zone into a wind-rich North and a demand-heavy South would create persistent regional price differentials. For long-haul battery-electric trucks that traverse multiple pricing regions, such differentials alter where along a route it is cheapest to charge, thereby reshaping the spatial distribution of charging infrastructure demand. We quantify this effect using a cost-minimizing linear program for multi-year fleet turnover and spatially resolved charging allocation on approximately 1,870 origin-destination freight flows along the Scandinavian-Mediterranean TEN-T corridor. Six zone-split scenarios---combining three North-South price spreads (5\%, 10\%, 20\%) with two implementation timings (from 2032, from 2040)---are compared against a unified-zone baseline. Results show that while the aggregate BEV fleet share is insensitive to the split, the spatial allocation of charging demand shifts substantially northward: in the most pronounced scenario (20\% spread from 2032), DE-North gains +111 MW of required charging capacity at 2040, while DE-South loses -87 MW. The redistribution propagates beyond German borders, with Austria losing up to 31 MW of required capacity. Total corridor-wide charging capacity remains constant across scenarios, confirming that the zone split redistributes---but does not reduce---aggregate demand. These findings highlight that electricity market zone design creates infrastructure planning externalities for the transport sector that extend across national borders.
+The objective of this paper is to quantify the impact of a potential German electricity bidding zone split on the spatial distribution of charging infrastructure required for long-haul battery-electric trucks. Splitting Germany's unified zone into a wind-rich North and a demand-heavy South would create persistent regional price differentials, altering where along a route it is cheapest to charge. We assess this effect with a cost-optimization model for fleet turnover and charging allocation along the Scandinavian--Mediterranean Trans-European Transport Network (TEN-T) freight corridor. Results show that while aggregate battery-electric truck (BET) adoption is insensitive to the split, spatially varying adoption concentrates more BET activity in the North, and the spatial allocation of charging demand shifts substantially northward. This redistribution propagates beyond German borders, affecting required charging capacity in neighboring countries. Total corridor-wide capacity remains constant across all scenarios, confirming that the zone split redistributes---but does not reduce---aggregate demand. These findings highlight that electricity market zone design creates infrastructure planning externalities for the transport sector that extend across national borders.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -74,16 +74,17 @@ Across Europe, there is an ongoing discussion on whether large, uniform electric
 
 One of the most prominent instances of this debate is the potential splitting of the German electricity market zone~\cite{b_trepper2015, b_fraunholz2021, b_knorr2025, b_moretto2026}. Germany currently operates as a single bidding zone despite significant structural congestion along its North--South axis: wind-rich northern regions generate surplus electricity that must be transmitted to demand-heavy southern industrial centers~\cite{b_trepper2015, b_fraunholz2021, b_knorr2025, b_hurta2022, b_ostergaard2025, b_emelianova2025}.
 
-Simulation studies have shown that a German North--South split reduces redispatch but creates significant distributional effects on electricity prices, generation investment, and welfare~\cite{b_trepper2015, b_fraunholz2021, b_knorr2025, b_moretto2026}. Beyond the electricity sector, zone reconfigurations cascade into end-use sectors: they alter the feasibility of electrification in heating, transport, and industry~\cite{b_ostergaard2025, b_emelianova2025}, change investment viability of storage infrastructure~\cite{b_hurta2022}, and affect demand differently across economic sectors~\cite{b_cho2015}.
-A consumer sector rarely discussed in this context is the transport sector. Charging costs---largely determined by local electricity prices---significantly affect the cost competitiveness of battery-electric trucks~\cite{b_noll2022, b_lanz2022}, yet the effect of price differences across electricity market zones on the spatial allocation of charging demand has barely been studied, with the exception of Pagnier et al.~\cite{b_pagnier2026} who find a relevant link between zonal electricity prices and optimal truck electrification in Norway.
+Simulation studies show that a German North--South split reduces redispatch but creates significant distributional effects on electricity prices, generation investment, and welfare~\cite{b_trepper2015, b_fraunholz2021, b_knorr2025, b_moretto2026}. Beyond the electricity sector, zone reconfigurations cascade into end-use sectors: they alter the feasibility of electrification in heating, transport, and industry~\cite{b_ostergaard2025, b_emelianova2025}, change investment viability of storage infrastructure~\cite{b_hurta2022}, and affect demand differently across economic sectors~\cite{b_cho2015}.
+A consumer sector rarely discussed in this context is the transport sector. Charging costs---largely determined by local electricity prices---significantly affect the cost competitiveness of battery-electric trucks~\cite{b_noll2022, b_lanz2022}, yet the effect of price differences across electricity market zones on the spatial allocation of charging demand has barely been studied, with the exception of Pagnier et al.~\cite{b_pagnier2026} who find a relevant link between zonal electricity prices and optimal truck electrification in Norway. Unlike their single-country analysis, the present study examines cross-border spillover effects along an international freight corridor.
+Moreover, existing charging infrastructure planning tools for long-haul truck freight do not account for spatially varying electricity prices along the route, implicitly assuming uniform charging costs across regions and countries~\cite{b_shoman2023}.
 
-An added dimension in the transport sector, compared with stationary consumers such as industry or heating, is that transport consumers are mobile: long-haul trucks travel across multiple regions and, for international freight, across national borders and electricity market zones. This mobility creates an opportunity---when charging is optimized over the route---to exploit spatial price differentials by shifting charging demand toward regions with lower electricity costs, thereby improving cost competitiveness. It also means that a zone split in one country (here, Germany) can redistribute charging loads not only within that country but along the entire transit corridor.
+An added dimension in the transport sector, compared with stationary consumers such as industry or heating, is that transport consumers are mobile: long-haul trucks travel across multiple regions and, for international freight, across national borders and electricity market zones. This mobility creates an opportunity---when charging is optimized over the route---to exploit spatial price differentials by shifting charging demand toward regions with lower electricity costs, thereby improving cost competitiveness. It also means that a zone split in one country (here, Germany) can redistribute charging demand not only within that country but along the entire transit corridor.
 
 
 \subsection{Research Objective}
-\hl{Research questions need to be adapted.} This leads to the following research question: \textbf{How does a splitting of the German electricity market zone affect (1)~CO$_2$ emissions from freight transport on German highways, (2)~the spatial distribution of truck charging demand between Northern and Southern Germany, and (3)~the risk of stranded charging infrastructure when the split is introduced at different points in time?}
+This leads to the following research questions: \textbf{(1)~How does a splitting of the German electricity market zone affect the spatial distribution of truck charging demand between Northern and Southern Germany? (2)~Does this redistribution propagate beyond German borders, affecting required charging infrastructure capacities in neighboring countries along the corridor?}
 
-We address this by simulating a market split via expected electricity price levels under different conditions of the split (spread magnitude and timing), deriving location-specific charging costs, and modeling the long-term demand response with a linear program for cost-optimal multi-year fleet turnover and charging demand allocation along origin-destination truck flows on the Scandinavian-Mediterranean corridor.
+We address this by simulating a market split via expected electricity price levels under different conditions of the split (spread magnitude and timing), deriving location-specific charging costs, and modeling the long-term demand response with a linear program for cost-optimal multi-year fleet turnover and charging demand allocation along origin-destination truck flows on the Scandinavian--Mediterranean TEN-T corridor. This corridor is selected because it traverses Germany along its full North--South axis, crossing both proposed electricity market zones, and extends into neighboring countries on both sides, enabling the analysis of cross-border spillover effects.
 
 \section{Methodology and Data}
 
@@ -92,7 +93,7 @@ We address this by simulating a market split via expected electricity price leve
 We simulate the impact of a German electricity market zone split by constructing a scenario matrix that varies two dimensions: (i)~the \emph{magnitude} of the North--South electricity price spread, and (ii)~the \emph{timing} of when the zone split takes effect. The scenario matrix is summarized in Table~\ref{tab:scenarios}.
 
 \subsubsection{Scenario design}
-A single \emph{baseline} scenario assumes a unified German price zone throughout the modeling horizon (2020--2050), corresponding to the current market design. Six zone-split scenarios are constructed by combining three spread levels with two implementation timings (from~2032 and from~2040).
+A single \emph{baseline} scenario assumes a unified German bidding zone throughout the modeling horizon (2020--2050), corresponding to the current market design. Six zone-split scenarios are constructed by combining three spread levels with two implementation timings (from~2032 and from~2040).
 
 \textbf{Price spread levels.}
 The price differential between the North and South German zones is applied as a symmetric, relative adjustment to the baseline wholesale electricity price at each node:
@@ -112,10 +113,10 @@ The zone split takes effect in one of two years:
 Before the split year, all German nodes retain the baseline (unified) electricity price. This dimension captures the policy uncertainty around \emph{when} such a reform might be implemented, and whether early versus late splitting has different effects on the already-established truck fleet and charging infrastructure.
 
 \textbf{Zone definition.}
-Germany is divided into two zones following the TSO boundary convention used in Trepper et al.~\cite{b_trepper2015} and Fraunholz et al.~\cite{b_fraunholz2021}:
+Germany is divided into two zones following the transmission system operator (TSO) boundary convention used in Trepper et al.~\cite{b_trepper2015} and Fraunholz et al.~\cite{b_fraunholz2021}:
 \begin{itemize}
     \item \textbf{North} (50Hertz + TenneT-North): wind-rich regions with lower marginal generation costs (Lower Saxony, Schleswig-Holstein, Mecklenburg-Vorpommern, Brandenburg, Berlin, Saxony, Saxony-Anhalt, Thuringia, Bremen, Hamburg)
-    \item \textbf{South} (Amprion + TransnetBW + Bavaria): demand-heavy regions with higher marginal costs (NRW, Hesse, Rhineland-Palatinate, Saarland, Baden-W\"urttemberg, Bavaria)
+    \item \textbf{South} (Amprion + TenneT-South + TransnetBW): demand-heavy regions with higher marginal costs (NRW, Hesse, Rhineland-Palatinate, Saarland, Baden-W\"urttemberg, Bavaria)
 \end{itemize}
 
 \begin{table}[htbp]
@@ -139,21 +140,19 @@ High (20\%) & H-2032 & H-2040 \\
 \end{table}
 
 \subsubsection{Electricity prices and charging costs}
-Baseline wholesale electricity prices are taken from the \textbf{Go~RES} scenario of GENeSYS-MOD~\cite{b_genesys}, which assumes ambitious renewable energy expansion in line with the EU's Green Deal targets. This scenario was selected because it represents a central pathway with high renewable penetration---precisely the conditions under which North--South price differentials in Germany are expected to be most pronounced due to the geographic concentration of wind power in the North. Go~RES provides node-level annual wholesale electricity prices for 2020--2050 across all corridor countries (NO, FI, SE, DK, DE, AT, IT). For zone-split scenarios, the German prices are adjusted as described above: for each German node, the wholesale price is multiplied by $(1 - \delta/2)$ in the North zone or $(1 + \delta/2)$ in the South zone, where $\delta$ is the relative spread (5\%, 10\%, or 20\%). This adjustment is only applied from the split year onward; earlier years retain the unified price.
+Baseline wholesale electricity prices are taken from the \textbf{Go~RES} scenario of GENeSYS-MOD~\cite{b_genesys}, which assumes ambitious renewable energy expansion in line with the EU's Green Deal targets. This scenario is selected because it represents a central pathway with high renewable penetration---precisely the conditions under which North--South price differentials in Germany are expected to be most pronounced due to the geographic concentration of wind power in the North. Go~RES provides annual wholesale electricity prices by country for 2020--2050 across all corridor countries (NO, FI, SE, DK, DE, AT, IT). For zone-split scenarios, the German prices are adjusted as described above: for each German node, the wholesale price is multiplied by $(1 - \delta/2)$ in the North zone or $(1 + \delta/2)$ in the South zone, where $\delta$ is the relative spread (5\%, 10\%, or 20\%). This adjustment is only applied from the split year onward; earlier years retain the unified price. A charge point operator (CPO) markup of 30\% is added to wholesale prices to account for grid fees, operating costs, and profit margins, yielding the final fast-charging electricity price at each location.
 
-\hl{Local charging costs are composed of: wholesale electricity price, network charges (grid fees), CPO markup, and charging infrastructure investment costs. Describe each component and how they vary spatially. Include map showing two snapshots of charging cost landscape.}
+Fig.~\ref{fig:elec_prices} shows the resulting electricity charging prices (including CPO markup) for scenario H-2032. The North--South differential is clearly visible: DE-North prices fall below the corridor-country range while DE-South prices rise above it. Non-German countries remain unaffected by the split.
 
-Fig.~\ref{fig:elec_prices} shows the resulting electricity charging prices (including CPO markup) for the High~(20\%) spread scenario (split from~2032). The North--South differential is clearly visible: DE-North prices fall below the corridor-country range while DE-South prices rise above it. Non-German countries remain unaffected by the split.
-
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centerline{\includegraphics[width=\columnwidth]{eem_electricity_prices_by_country_4scenarios.pdf}}
-\caption{Fast-charging electricity prices for the High~(20\%) zone-split scenario (from~2032). Gray areas show diesel cost (base and including CO$_2$ price). The blue band shows the range of other corridor countries (NO, FI, SE, DK, AT, IT). DE-North (squares) and DE-South (triangles) diverge from~2032 onward.}
+\caption{Fast-charging electricity prices for scenario H-2032. Gray areas show diesel cost (base and including CO$_2$ price). The blue band shows the range of other corridor countries (NO, FI, SE, DK, AT, IT). DE-North (squares) and DE-South (triangles) diverge from~2032 onward.}
 \label{fig:elec_prices}
 \end{figure}
 
 \subsection{Cost-optimization of fleet turnover and charging demand allocation}
 
-The spatial allocation of charging demand and fleet composition is determined by a linear program that minimizes total discounted system cost over the horizon 2020--2050 with a 4-year time step. The model, TransComp~\cite{b_transcomp}, is formulated as a network design problem and determines, for each OD pair and period, the cost-optimal mix of ICEV and BEV trucks, the spatial allocation of charging energy along routes, and the required charging infrastructure investments. Table~\ref{tab:nomenclature} summarizes the key notation.
+The spatial allocation of charging demand and fleet composition is determined by a linear program that minimizes total discounted system cost over the horizon 2020--2050 with a 4-year time step. The model, TransComp~\cite{b_transcomp}, is formulated as a network design problem and determines, for each origin-destination (OD) pair and period, the cost-optimal mix of internal combustion engine vehicle (ICEV) and battery-electric vehicle (BEV) trucks, the spatial allocation of charging energy along routes, and the required charging infrastructure investments. Table~\ref{tab:nomenclature} summarizes the key notation.
 
 \begin{table}[htbp]
 \caption{Key notation}
@@ -167,7 +166,7 @@ $y \in \mathcal{Y}$ & modeled years \\
 $r \in \mathcal{R}$ & origin-destination pairs \\
 $t \in \mathcal{T}$ & drivetrain technologies (ICEV, BEV) \\
 $g \in \mathcal{G}$ & vehicle generation (purchase year) \\
-$e \in \mathbf{E}_r$ & geographic locations along route $r$ \\
+$e \in \mathcal{E}_r$ & geographic locations along route $r$ \\
 \midrule
 \multicolumn{2}{l}{\textbf{Decision variables}} \\
 $f_{yrtg}$ & transport volume [t/a] \\
@@ -213,11 +212,11 @@ with initial SOC set to $SOC^{init} \cdot Q^{\mathrm{batt}}_{tg}$ and a minimum 
 \begin{equation}
     Q^{\mathrm{charg}}_{e} + \sum_{y' \leq y} q^+_{y'e} \;\geq\; \gamma \sum_{r \in \mathcal{R}_e} \sum_{t,g} s_{yrtge} \quad \forall\, y, e
 \end{equation}
-where $\gamma$ converts annual energy to peak power demand. Infrastructure, once built, is irreversible---creating path dependencies when the zone split is introduced at different times.
+where $\gamma$ converts annual energy to peak power demand.
 
 \subsection{Traffic flow data}
 
-The model operates on origin-destination (OD) freight flows at the NUTS-2 level along the Scandinavian-Mediterranean TEN-T corridor, covering Norway, Finland, Sweden, Denmark, Germany, Austria, and Italy. Freight volumes are derived from the ETISplus European freight transport database~\cite{b_speth2021}, which provides bilateral road freight tonnages between NUTS-2 regions. Routes are computed as shortest-path sequences of NUTS-2 regions over the highway network, and mandatory driver rest stops are allocated along each route following EU~Regulation~561/2006 (4.5~h maximum continuous driving time)~\cite{b_transcomp}.
+The model operates on OD freight flows at the Nomenclature of Territorial Units for Statistics (NUTS) level~2 along the Scandinavian--Mediterranean TEN-T corridor, covering Norway, Finland, Sweden, Denmark, Germany, Austria, and Italy. Freight volumes are derived from the ETISplus European freight transport database~\cite{b_speth2021}, which provides bilateral road freight tonnages between NUTS-2 regions. Routes are computed as shortest-path sequences of NUTS-2 regions over the highway network, and mandatory driver rest stops are allocated along each route following EU~Regulation~561/2006 (4.5~h maximum continuous driving time)~\cite{b_transcomp}.
 
 Two route categories are included:
 \begin{enumerate}
@@ -230,21 +229,23 @@ After filtering, the dataset contains approximately 1,787 international OD pairs
 
 \section{Results}
 
+We present results for all seven scenarios, focusing on route-level electrification shifts, spatial redistribution of charging demand, and cross-border infrastructure spillovers.
+
 \subsection{Route-level electrification shifts}
 
-While the aggregate BEV fleet share remains nearly identical across all scenarios ($\sim$43.7\% at 2040), the zone split fundamentally reshapes \emph{which} routes electrify. Fig.~\ref{fig:violin} shows the distribution of route-level BEV share changes between the High~(20\%) from-2032 scenario and the baseline at~2040, disaggregated by corridor type. Routes are classified as \emph{North only} if their path passes exclusively through DE-North NUTS-2 regions, \emph{South only} if exclusively through DE-South, and \emph{cross-zonal} if through both.
+While the aggregate BEV fleet share remains nearly identical across all scenarios ($\sim$43.7\% at 2040), the zone split fundamentally reshapes \emph{which} routes electrify. Fig.~\ref{fig:violin} shows the distribution of route-level BEV share changes between scenario H-2032 and the baseline at~2040, disaggregated by corridor type. Routes are classified as \emph{North only} if their path passes exclusively through DE-North NUTS-2 regions, \emph{South only} if exclusively through DE-South, and \emph{cross-zonal} if through both.
 
-North-only routes gain on average $+21$~pp in BEV share, with many routes shifting from $\sim$15\% to 100\% BEV---corresponding to approximately 1,230 additional tonnes transported by BEV trucks on these corridors. Conversely, South-only routes lose on average $-18$~pp, with $\sim$2,980~tonnes shifting back from BEV to ICEV. Cross-zonal routes show mixed effects (mean $+4$~pp), with 245~routes gaining and 100~losing more than 5~pp BEV share.
+North-only routes gain on average $+21$~percentage points (pp) in BEV share, with many routes shifting from $\sim$15\% to 100\% BEV---corresponding to approximately 1,230 additional tonnes transported by BEV trucks on these corridors. Conversely, South-only routes lose on average $-18$~pp, with $\sim$2,980~tonnes remaining on ICEV instead of switching to BEV. Cross-zonal routes show a more balanced but mixed effect (mean $+4$~pp), with 245~routes gaining and 100~losing more than 5~pp BEV share, as these routes traverse both cheaper and more expensive zones.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.85\columnwidth]{eem_route_bev_violin.pdf}}
-\caption{Distribution of route-level BEV share changes (High 20\%, from 2032 vs.\ baseline) at 2040 by corridor type. Solid line: mean; dashed line: median. North-only routes gain BEV share while South-only routes lose it, despite identical aggregate fleet composition.}
+\caption{Distribution of route-level BEV share changes (H-2032 vs.\ baseline) at 2040 by corridor type. Solid line: mean; dashed line: median. North-only routes gain BEV share while South-only routes lose it, despite identical aggregate fleet composition.}
 \label{fig:violin}
 \end{figure}
 
 \subsection{Spatial redistribution of charging demand}
 
-Fig.~\ref{fig:charging_delta} shows the change in annual charging demand relative to the baseline for each zone-split scenario. The redistribution is approximately symmetric: charging demand gained by DE-North mirrors the loss in DE-South. The effect scales with the price spread---the High~(20\%) from-2032 scenario shifts nearly 500~GWh/a northward by~2048, while even the Low~(5\%) scenario produces a shift of $\sim$270~GWh/a. Later implementation (from~2040 vs.\ from~2032) reduces the shift but does not eliminate it, as the cumulative fleet and infrastructure decisions made before the split constrain the system's response.
+Fig.~\ref{fig:charging_delta} shows the change in annual charging demand relative to the baseline for each zone-split scenario. The redistribution is approximately symmetric: charging demand gained by DE-North mirrors the loss in DE-South. The effect scales with the price spread---scenario H-2032 shifts nearly 500~GWh/a northward by~2048, while even scenario L-2032 produces a shift of $\sim$270~GWh/a. Later implementation (from~2040 vs.\ from~2032) reduces the shift but does not eliminate it, as the cumulative fleet and infrastructure decisions taken before the split constrain the system's response.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{eem_charging_demand_delta.pdf}}
@@ -254,18 +255,19 @@ Fig.~\ref{fig:charging_delta} shows the change in annual charging demand relativ
 
 \subsection{Infrastructure utilization and cross-border spillovers}
 
-Because charging infrastructure is irreversible once deployed, the zone split creates a mismatch between where capacity was built (under baseline assumptions) and where it is actually needed. Fig.~\ref{fig:used_unused} compares installed capacity utilization for the baseline and the High~(20\%) from-2032 scenario. In DE-South, the split causes substantial overcapacity (hatched bars), as demand migrates northward but previously installed chargers remain. In DE-North, the opposite occurs: required capacity exceeds the baseline build-out, creating a deficit that must be met by accelerated infrastructure investment.
+The zone split creates a mismatch between where capacity is built under baseline assumptions and where it is actually needed. Fig.~\ref{fig:used_unused} compares installed capacity utilization for the baseline and scenario H-2032. In DE-South, the split causes significant overcapacity (hatched bars) during the 2028 and 2036 investment periods as demand migrates northward, though this overcapacity diminishes over time as the system adjusts. In DE-North, the opposite occurs: required capacity exceeds the baseline build-out, creating a deficit that must be met by accelerated infrastructure investment.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{eem_used_vs_unused_capacity.pdf}}
-\caption{Installed charging capacity decomposed into used (solid) and unused (hatched) components for DE-North (top) and DE-South (bottom). Blue: baseline (unified zone); red: High~(20\%) zone split from~2032.}
+\caption{Installed charging capacity decomposed into used (solid) and unused (hatched) components for DE-North (top) and DE-South (bottom). Blue: baseline (unified zone); red: scenario H-2032.}
 \label{fig:used_unused}
 \end{figure}
 
-The redistribution of charging demand within Germany propagates to neighbouring countries along the corridor. Table~\ref{tab:mw_delta} reports the change in required charging capacity (MW) relative to the baseline for each zone and scenario at~2040. DE-North gains up to $+111$~MW of required capacity (H-2032), while DE-South loses $-87$~MW. Notably, Austria loses up to $-31$~MW in the most extreme scenario (H-2032) as the large price spread pulls charging demand back into cheaper DE-North, but shows small increases ($<+4$~MW) in all other scenarios. Italy gains up to $+12$~MW in the H-2032 case. Denmark is essentially unaffected ($<1$~MW). The total corridor capacity remains constant across scenarios ($\sim$559~MW), confirming that the zone split redistributes---but does not reduce---aggregate charging demand. These results show that a unilateral zone-split decision in Germany creates infrastructure planning externalities for transit countries.
-
+The redistribution of charging demand within Germany propagates to neighboring countries along the corridor. Table~\ref{tab:mw_delta} reports the change in required charging capacity (MW) relative to the baseline for each zone and scenario at~2040. DE-North gains up to $+111$~MW of required capacity (H-2032), while DE-South loses $-87$~MW. Notably, Austria loses up to $-31$~MW relative to the baseline in scenario H-2032 as the large price spread pulls charging demand back into cheaper DE-North, but shows small increases relative to the baseline ($<+4$~MW) in all other scenarios. Italy gains up to $+12$~MW in the H-2032 case. Denmark is essentially unaffected ($<1$~MW). The total corridor capacity remains constant across scenarios ($\sim$559~MW), confirming that the zone split redistributes---but does not reduce---aggregate charging demand.
 \begin{table}[htbp]
-\caption{Change in required charging capacity vs.\ baseline at 2040 (MW)}
+\caption{Change in required charging capacity vs.\ baseline at 2040 (MW).$^{*}$}
+\vspace{-2pt}
+\raggedright\scriptsize $^{*}$Changes in NO, FI, and SE are negligible ($<$1~MW each) and omitted for brevity.
 \label{tab:mw_delta}
 \begin{center}
 \footnotesize
@@ -285,46 +287,27 @@ H-2040 & $+$81.5 & $-$79.0 & $+$3.7 & $-$2.5 & $<$1 \\
 \end{center}
 \end{table}
 
-\section{Conclusion and Future Work}
+\section{Discussion and Conclusion}
 
-The zone split does not change the aggregate BEV fleet size but fundamentally reshapes \emph{where} charging demand arises, creating regional winners and losers along the Scandinavian--Mediterranean freight corridor. A promising extension is a \textbf{rolling-horizon} formulation: instead of a single-shot optimization over the full planning horizon, infrastructure investment decisions would be made with limited foresight. This would capture the risk of building charging capacity under one market-zone configuration (unified) that becomes underutilized if the zone split occurs later---providing a more realistic estimate of stranded infrastructure costs.
+Regarding the first research question, results show that the zone split does not alter aggregate BEV adoption but fundamentally reshapes \emph{where} charging demand arises. Lower electricity prices in the North zone lead the cost-optimization to allocate more BET activity to the North and pull charging demand northward, while DE-South experiences a corresponding decline. The effect scales with the price spread magnitude and is stronger when the split is introduced earlier, as more fleet turnover decisions occur under differentiated prices.
+
+Regarding the second research question, the redistribution of charging demand does not stop at German borders. In the most pronounced scenario (H-2032), Austria loses up to 31~MW of required charging capacity relative to the baseline, as the large North--South price differential pulls demand back into cheaper DE-North. Italy, at the southern end of the corridor, sees a moderate increase. These cross-border spillovers show that a unilateral zone-split decision in one country creates infrastructure planning externalities for transit countries along the same freight corridor.
+
+These results point to two broader conclusions. First, they indicate the need for cooperative planning between electricity market designers, transport policy makers, and infrastructure planners to effectively avoid significant misallocation of charging infrastructure. Without coordination, infrastructure investments risk being stranded in regions where demand declines after a zone split, while underserving regions where demand grows. Second, the strong sensitivity of charging demand allocation to local electricity prices emphasizes that spatially varying charging costs need to be considered endogenously in infrastructure planning models, rather than treated as a uniform input.
+
+The results also indicate temporary overcapacities in DE-South when infrastructure built under unified-zone assumptions faces reduced demand after the split. A rolling-horizon formulation, where infrastructure investment decisions are made with limited foresight, would better capture these overcapacity risks and provide more realistic estimates of stranded assets when the market design changes unexpectedly. Extending the analysis to additional corridors and zone configurations beyond the two-zone North--South split would further generalize the findings.
 
 
-\section*{Acknowledgment}
 
-The preferred spelling of the word ``acknowledgment'' in America is without 
-an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B. 
-G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor 
-acknowledgments in the unnumbered footnote on the first page.
+\section*{Declaration of Generative AI Use}
 
-\section*{References}
-
-Please number citations consecutively within brackets \cite{b1}. The 
-sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
-number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
-the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
-
-Number footnotes separately in superscripts. Place the actual footnote at 
-the bottom of the column in which it was cited. Do not put footnotes in the 
-abstract or reference list. Use letters for table footnotes.
-
-Unless there are six authors or more give all authors' names; do not use 
-``et al.''. Papers that have not been published, even if they have been 
-submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
-that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
-Capitalize only the first word in a paper title, except for proper nouns and 
-element symbols.
-
-For papers published in translation journals, please give the English 
-citation first, followed by the original foreign-language citation \cite{b6}.
+During the preparation of this work, the authors used Claude Code (Anthropic) in order to assist with \LaTeX{} typesetting, grammar and language editing, terminological consistency, and cross-checking of references. After using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the published work.
 
 \begin{thebibliography}{00}
-\bibitem{b_trepper2015} K. Trepper, M. Bucksteeg, and C. Weber, ``Market splitting in Germany -- new evidence from a three-zone stochastic electricity market model,'' \emph{Energy Policy}, vol.~87, pp. 199--215, 2015.
-\bibitem{b_fraunholz2021} C. Fraunholz, K. Hladik, R. Kraft, D. Kern\-er, and W. Fichtner, ``On the long-term efficiency of market splitting in Germany,'' \emph{Energy Policy}, vol.~149, 111833, 2021.
-\bibitem{b_knorr2025} M. Kn\"orr, C. Fraunholz, and W. Fichtner, ``Impacts of German bidding zone configurations on the European electricity market,'' arXiv:2403.09265v6, 2025.
-\bibitem{b_zinke2023} J. Zinke, ``Bidding zone review: implications for Germany and Europe,'' EWI Working Paper 23/07, 2023.
+\bibitem{b_trepper2015} K. Trepper, M. Bucksteeg, and C. Weber, ``Market splitting in Germany -- new evidence from a three-stage numerical model of Europe,'' \emph{Energy Policy}, vol.~87, pp. 199--215, 2015.
+\bibitem{b_fraunholz2021} C. Fraunholz, D. Hladik, D. Keles, D. M\"ost, and W. Fichtner, ``On the long-term efficiency of market splitting in Germany,'' \emph{Energy Policy}, vol.~149, 111833, 2021.
+\bibitem{b_knorr2025} J. Kn\"orr, M. Bichler, and T. Dobos, ``Zonal vs.\ nodal pricing: An analysis of different pricing rules in the German day-ahead market,'' arXiv:2403.09265v6, 2025.
 \bibitem{b_genesys} H. Gardian, L. Hering, and P.-Y. Oei, ``GENeSYS-MOD -- open-source energy system model,'' 2024. [Online]. Available: https://git.tu-berlin.de/genesysmod
-\bibitem{b_martin2024} J. Martin \emph{et al.}, ``Total cost of ownership and infrastructure requirements for long-haul battery-electric trucks in Europe,'' \emph{Transport Policy}, 2024.
 \bibitem{b_moretto2026} M. Moretto and M. G. Pollitt, ``How many zones should an electricity market have? A cross-country perspective on bidding zone design,'' \emph{Energy Policy}, vol.~210, 115030, 2026.
 \bibitem{b_hurta2022} A. Hurta, M. \v{Z}ilka, and F. Freiberg, ``Impact of the splitting of the German--Austrian electricity bidding zone on investment in a grid-scale battery energy storage system,'' \emph{Energy Reports}, vol.~8, pp. 12045--12062, 2022.
 \bibitem{b_ostergaard2025} P. A. \O stergaard, A. N. Andersen, and F. D. Nielsen, ``Market zones and electrification -- A case study on the impact of market zone configuration on power-to-heat,'' \emph{Renewable and Sustainable Energy Reviews}, vol.~219, 115865, 2025.
@@ -335,7 +318,7 @@ citation first, followed by the original foreign-language citation \cite{b6}.
 \bibitem{b_lanz2022} L. Lanz, B. Noll, T.~S. Schmidt, and B. Steffen, ``Comparing the levelized cost of electric vehicle charging options in Europe,'' \emph{Nature Communications}, vol.~13, no.~1, 5277, 2022.
 \bibitem{b_speth2021} D. Speth, V. Sauter, P. Pl\"otz, and T. Signer, ``Synthetic European road freight transport flow data (ETISplus),'' Mendeley Data, V2, 2021. doi: 10.17632/s2f3k79554.2.
 \bibitem{b_transcomp} A.~M. Golab, H. Gardian, P.-Y. Oei, and T.~S. Schmidt, ``TransComp: An optimization model for the transition to low-emission freight transport,'' 2025. [Online]. Available: https://github.com/antoniamgolab/iDesignRES\_transcompmodel
-\bibitem{b_barani2026} M. Barani, K. L\"offler, P. Crespo del Granado, N. Moskalenko, E. Panos, F.~M. Hoffart, C. von Hirschhausen, M. Kannavou, H. Auer, K. Hainsch, T. Gonz\'alez Grand\'on, S. Mathisen, and A. Tomasgard, ``European energy vision 2050 and beyond: Designing scenarios for Europe's energy transition,'' \emph{Renewable and Sustainable Energy Reviews}, vol.~225, 116074, 2026.
+\bibitem{b_shoman2023} W. Shoman, S. Yeh, F. Sprei, P. Pl\"otz, and D. Speth, ``Battery electric long-haul trucks in Europe: Public charging, energy, and power requirements,'' \emph{Transportation Research Part D: Transport and Environment}, vol.~121, 103825, 2023.
 \end{thebibliography}
 
 \appendix

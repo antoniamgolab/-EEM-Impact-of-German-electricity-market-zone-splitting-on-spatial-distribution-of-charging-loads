@@ -181,6 +181,7 @@ $D^{\mathrm{spec}}_{tg}$ & specific energy consumption [kWh/km] \\
 $Q^{\mathrm{batt}}_{tg}$ & battery/tank capacity [kWh] \\
 $p^{\mathrm{fuel}}_{te}(y)$ & location-specific fuel price [EUR/kWh] \\
 $\pi^{\mathrm{CO_2}}_e(y)$ & carbon price [EUR/tCO$_2$] \\
+$\alpha_h$, $\beta_h$ & technology substitution rate limits [--] \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -201,6 +202,12 @@ where $d_y = (1+\rho)^{-(y-y_0)}$ is the discount factor and $\Delta$ is the per
 \end{equation}
 
 \textbf{Fleet turnover.} The vehicle stock is tracked by generation through a stock-flow balance of existing vehicles, retirements (after fixed lifetime $\Lambda_{tg}$), and new purchases, capturing the fleet inertia that constrains the pace of technology transition.
+
+\textbf{Technology substitution rate.} The rate at which the fleet composition can change between consecutive periods is bounded:
+\begin{equation}
+    \left| H^{t}_{y} - H^{t}_{y-\Delta} \right| \leq \alpha_h \cdot H^{\mathrm{total}}_{y} + \beta_h \cdot H^{t}_{y-\Delta} \quad \forall\, y > y_0,\, t
+\end{equation}
+where $H^{t}_{y} = \sum_{r,g} h_{yrtg}$ is the corridor-wide fleet of technology $t$ at year $y$, $\alpha_h$ is the maximum share of the total fleet that any technology can gain per period, and $\beta_h$ bounds growth relative to the technology's own previous stock. Both parameters are set to 0.1. Additionally, BEV purchases are blocked before~2028 to reflect realistic market introduction timelines.
 
 \textbf{State of charge.} The battery state of charge is tracked spatially along each route:
 \begin{equation}
@@ -235,7 +242,7 @@ We present results for all seven scenarios, focusing on route-level electrificat
 
 While the aggregate BEV fleet share remains nearly identical across all scenarios ($\sim$43.7\% at 2040), the zone split fundamentally reshapes \emph{which} routes electrify. Fig.~\ref{fig:violin} shows the distribution of route-level BEV share changes between scenario H-2032 and the baseline at~2040, disaggregated by corridor type. Routes are classified as \emph{North only} if their path passes exclusively through DE-North NUTS-2 regions, \emph{South only} if exclusively through DE-South, and \emph{cross-zonal} if through both.
 
-North-only routes gain on average $+21$~percentage points (pp) in BEV share, with many routes shifting from $\sim$15\% to 100\% BEV---corresponding to approximately 1,230 additional tonnes transported by BEV trucks on these corridors. Conversely, South-only routes lose on average $-18$~pp, with $\sim$2,980~tonnes remaining on ICEV instead of switching to BEV. Cross-zonal routes show a more balanced but mixed effect (mean $+4$~pp), with 245~routes gaining and 100~losing more than 5~pp BEV share, as these routes traverse both cheaper and more expensive zones.
+North-only routes gain on average $+18$~percentage points (pp) in BEV share, with many routes shifting from $\sim$15\% to 100\% BEV---corresponding to approximately 1,160 additional tonnes transported by BEV trucks on these corridors. Conversely, South-only routes lose on average $-10$~pp, with $\sim$2,820~tonnes remaining on ICEV instead of switching to BEV. Cross-zonal routes show a more balanced but mixed effect (mean $+2$~pp), with 212~routes gaining and 95~losing more than 5~pp BEV share, as these routes traverse both cheaper and more expensive zones.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.85\columnwidth]{eem_route_bev_violin.pdf}}
@@ -357,6 +364,26 @@ Table~\ref{tab:vehicle_assumptions} summarizes the key cost and technical parame
 \quad Annual mileage & km/a & \multicolumn{2}{c}{136{,}750} \\
 \quad Discount rate & -- & \multicolumn{2}{c}{5\%} \\
 \quad Value of time & EUR/h & \multicolumn{2}{c}{30} \\
+\quad Substitution rate $\alpha_h$ & -- & \multicolumn{2}{c}{0.1} \\
+\quad Substitution rate $\beta_h$ & -- & \multicolumn{2}{c}{0.1} \\
+\quad BEV adoption start & -- & \multicolumn{2}{c}{2028} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+Table~\ref{tab:carbon_price} reports the carbon price trajectory applied uniformly across all scenarios, based on the GENeSYS-MOD Go~RES pathway~\cite{b_genesys}.
+
+\begin{table}[htbp]
+\caption{Carbon price trajectory (EUR/tCO$_2$), identical across all scenarios}
+\label{tab:carbon_price}
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}l c c c c c c c@{}}
+\toprule
+\textbf{Year} & 2020 & 2028 & 2032 & 2036 & 2040 & 2048 & 2060 \\
+\midrule
+EUR/tCO$_2$ & 30 & 47 & 76 & 91 & 114 & 168 & 355 \\
 \bottomrule
 \end{tabular}
 \end{center}
